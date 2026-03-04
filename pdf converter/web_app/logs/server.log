@@ -1,0 +1,237 @@
+2026-03-04 14:17:39,479 [WARNING]  * Debugger is active!
+2026-03-04 14:17:39,479 [INFO]  * Debugger PIN: 300-561-094
+2026-03-04 14:17:41,466 [INFO] 127.0.0.1 - - [04/Mar/2026 14:17:41] "GET / HTTP/1.1" 200 -
+2026-03-04 14:17:41,488 [INFO] 127.0.0.1 - - [04/Mar/2026 14:17:41] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2026-03-04 14:17:47,925 [INFO] Deleted old file: 1.pdf
+2026-03-04 14:17:47,925 [INFO] Deleted old file: 2.docx
+2026-03-04 14:17:47,925 [INFO] Deleted old file: 2_compressed.pdf
+2026-03-04 14:17:47,925 [INFO] Deleted old file: 2_compressed_locked.pdf
+2026-03-04 14:17:47,925 [INFO] Deleted old file: 2_locked.pdf
+2026-03-04 14:17:47,925 [INFO] Deleted old file: 2_rotated.pdf
+2026-03-04 14:17:47,925 [INFO] Deleted old file: a (3).pdf
+2026-03-04 14:17:47,925 [INFO] Deleted old file: a (3)_locked.pdf
+2026-03-04 14:17:47,925 [INFO] Deleted old file: a (3)_locked_unlocked.pdf
+2026-03-04 14:17:47,925 [INFO] Deleted old file: a (3)_rotated.docx
+2026-03-04 14:17:47,925 [INFO] Deleted old file: a (3)_rotated.pdf
+2026-03-04 14:17:47,933 [INFO] Deleted old file: a (4).docx
+2026-03-04 14:17:47,933 [INFO] Deleted old file: a (4).pdf
+2026-03-04 14:17:47,934 [INFO] Deleted old file: a (4)_locked.pdf
+2026-03-04 14:17:47,934 [INFO] Deleted old file: a (4)_rotated.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a.docx
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a.txt
+2026-03-04 14:17:47,935 [INFO] Deleted old file: animation_portfolio_images.zip
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_compressed.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_images.zip
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_locked (1)_unlocked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_locked (2)_unlocked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_locked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_locked_unlocked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_rotated.docx
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_rotated.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: a_rotated.pdf_result.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b (1).pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b (1).txt
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b (1)_compressed.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b (1)_images.zip
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b (1)_locked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b (1)_locked_unlocked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b (1)_rotated.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b.docx
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b.txt
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic (1).txt
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic (1)_compressed.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic (1)_images.zip
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic (1)_locked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic (1)_locked.txt
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic (1)_locked_unlocked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic (1)_rotated.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic (3)_images.zip
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic.docx
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic.txt
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic_compressed.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic_images.zip
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic_locked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: basic_rotated.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_1.docx
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_1.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_1.txt
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_1_compressed.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_1_locked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_1_locked_unlocked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_1_rotated.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_compressed.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_images.zip
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_locked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_locked_unlocked.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_page_1.png
+2026-03-04 14:17:47,935 [INFO] Deleted old file: b_rotated.pdf
+2026-03-04 14:17:47,935 [INFO] Deleted old file: Christine.docx
+2026-03-04 14:17:47,935 [INFO] Deleted old file: Christine.pdf
+2026-03-04 14:17:47,950 [INFO] Deleted old file: Christine_1_images.zip
+2026-03-04 14:17:47,950 [INFO] Deleted old file: coverletter (1).txt
+2026-03-04 14:17:47,951 [INFO] Deleted old file: coverletter (1)_compressed.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: coverletter (1)_locked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: coverletter (1)_rotated.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: coverletter.docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: coverletter.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: Detailed gesture woman_page_1.png
+2026-03-04 14:17:47,951 [INFO] Deleted old file: IMG_2854.heic_result.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: IMG_8585.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: IMG_8585.txt
+2026-03-04 14:17:47,951 [INFO] Deleted old file: IMG_8585_compressed.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: IMG_8585_locked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: IMG_8585_locked_unlocked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: IMG_8585_rotated.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: Matthew_Mammoliti__Figure_Drawing4.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: observation#1.pdf_result.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: profile.jpg_result.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: Screenshot (51).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: Two point #1.pdf_result.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: 1.png
+2026-03-04 14:17:47,951 [INFO] Deleted old file: 2.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: 2_compressed.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: 2_compressed_locked (3).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: 2_locked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a (1).docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a (3).docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a (3).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a (3)_locked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a (3)_rotated.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a (4).docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a (4).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a.docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a_locked (1).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a_locked (2).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a_locked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a_rotated.docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: a_rotated.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: b (1).docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: b (1).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: b (1)_locked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: b.docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: b.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: basic (1).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: basic (1)_compressed.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: basic (1)_locked (2).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: basic (1)_locked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: basic (3).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: basic.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: basic.png
+2026-03-04 14:17:47,951 [INFO] Deleted old file: b_locked.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: coverletter (1).pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: coverletter.docx
+2026-03-04 14:17:47,951 [INFO] Deleted old file: coverletter.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: deleted_pages.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: Detailed gesture woman.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: IMG_2854.heic
+2026-03-04 14:17:47,951 [INFO] Deleted old file: left hand drawing combo.pdf
+2026-03-04 14:17:47,951 [INFO] Deleted old file: locked.pdf
+2026-03-04 14:17:47,966 [INFO] Deleted old file: observation#1.pdf
+2026-03-04 14:17:47,966 [INFO] Deleted old file: Personal#1.pdf
+2026-03-04 14:17:47,966 [INFO] Deleted old file: profile.jpg
+2026-03-04 14:17:47,966 [INFO] Deleted old file: Screenshot (51).png
+2026-03-04 14:17:47,966 [INFO] Deleted old file: signature.pdf
+2026-03-04 14:17:47,966 [INFO] Deleted old file: signed.pdf
+2026-03-04 14:17:47,967 [INFO] Deleted old file: Two point #1.pdf
+2026-03-04 14:17:47,968 [INFO] Deleted old file: unlocked.pdf
+2026-03-04 14:17:47,968 [INFO] Upload received: Christine_1_1.pdf for action pdf_to_word
+2026-03-04 14:17:48,256 [INFO] Processing completed: output\Christine_1_1.docx
+2026-03-04 14:17:48,299 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\Christine_1_1.docx'
+2026-03-04 14:17:48,299 [INFO] 127.0.0.1 - - [04/Mar/2026 14:17:48] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:21:52,845 [INFO] Upload received: Christine_1_1.pdf for action pdf_to_text
+2026-03-04 14:21:53,027 [INFO] Processing completed: output\Christine_1_1.txt
+2026-03-04 14:21:53,034 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\Christine_1_1.txt'
+2026-03-04 14:21:53,034 [INFO] 127.0.0.1 - - [04/Mar/2026 14:21:53] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:29:33,294 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-04 14:29:33,294 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-04 14:29:33,309 [INFO]  * Restarting with stat
+2026-03-04 14:29:33,610 [WARNING]  * Debugger is active!
+2026-03-04 14:29:33,610 [INFO]  * Debugger PIN: 300-561-094
+2026-03-04 14:32:00,215 [INFO] 127.0.0.1 - - [04/Mar/2026 14:32:00] "GET / HTTP/1.1" 200 -
+2026-03-04 14:32:00,242 [INFO] 127.0.0.1 - - [04/Mar/2026 14:32:00] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2026-03-04 14:32:15,968 [INFO] Upload received: Christine_1_1.pdf for action pdf_to_word
+2026-03-04 14:32:16,263 [INFO] Processing completed: output\Christine_1_1.docx
+2026-03-04 14:32:16,304 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\Christine_1_1.docx'
+2026-03-04 14:32:16,304 [INFO] 127.0.0.1 - - [04/Mar/2026 14:32:16] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:32:22,121 [INFO] Upload received: Christine_1_1_1.docx for action word_to_pdf
+2026-03-04 14:32:26,157 [INFO] Processing completed: output\Christine_1_1_1.pdf
+2026-03-04 14:32:26,158 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\Christine_1_1_1.pdf'
+2026-03-04 14:32:26,158 [INFO] 127.0.0.1 - - [04/Mar/2026 14:32:26] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:32:35,663 [INFO] Upload received: Christine_1_1.pdf for action pdf_to_image
+2026-03-04 14:32:35,858 [INFO] Processing completed: output\Christine_1_1_images.zip
+2026-03-04 14:32:35,858 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\Christine_1_1_images.zip'
+2026-03-04 14:32:35,858 [INFO] 127.0.0.1 - - [04/Mar/2026 14:32:35] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:32:45,176 [INFO] Upload received: IMG_8585.png for action image_to_pdf
+2026-03-04 14:32:45,611 [INFO] Processing completed: output\IMG_8585.pdf
+2026-03-04 14:32:45,611 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\IMG_8585.pdf'
+2026-03-04 14:32:45,611 [INFO] 127.0.0.1 - - [04/Mar/2026 14:32:45] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:32:59,025 [INFO] Upload received: IMG_8585_1.pdf for action pdf_to_text
+2026-03-04 14:32:59,182 [INFO] Processing completed: output\IMG_8585_1.txt
+2026-03-04 14:32:59,182 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\IMG_8585_1.txt'
+2026-03-04 14:32:59,182 [INFO] 127.0.0.1 - - [04/Mar/2026 14:32:59] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:33:02,293 [INFO] Upload received: IMG_8585_1.pdf for action compress
+2026-03-04 14:33:02,575 [INFO] Processing completed: output\IMG_8585_1_compressed.pdf
+2026-03-04 14:33:02,591 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\IMG_8585_1_compressed.pdf'
+2026-03-04 14:33:02,591 [INFO] 127.0.0.1 - - [04/Mar/2026 14:33:02] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:33:07,843 [INFO] Upload received: IMG_8585_1.pdf for action rotate
+2026-03-04 14:33:08,021 [INFO] Processing completed: output\IMG_8585_1_rotated.pdf
+2026-03-04 14:33:08,025 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\IMG_8585_1_rotated.pdf'
+2026-03-04 14:33:08,025 [INFO] 127.0.0.1 - - [04/Mar/2026 14:33:08] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:33:12,998 [INFO] Upload received: IMG_8585_1.pdf for action rotate
+2026-03-04 14:33:13,143 [INFO] Processing completed: output\IMG_8585_1_rotated.pdf
+2026-03-04 14:33:13,160 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\IMG_8585_1_rotated.pdf'
+2026-03-04 14:33:13,160 [INFO] 127.0.0.1 - - [04/Mar/2026 14:33:13] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:33:18,410 [INFO] Upload received: IMG_8585_1.pdf for action rotate
+2026-03-04 14:33:18,559 [INFO] Processing completed: output\IMG_8585_1_rotated.pdf
+2026-03-04 14:33:18,575 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\IMG_8585_1_rotated.pdf'
+2026-03-04 14:33:18,576 [INFO] 127.0.0.1 - - [04/Mar/2026 14:33:18] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:33:29,827 [INFO] Upload received: IMG_8585_1.pdf for action lock_pdf
+2026-03-04 14:33:30,775 [INFO] Processing completed: output\IMG_8585_1_locked.pdf
+2026-03-04 14:33:30,792 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\IMG_8585_1_locked.pdf'
+2026-03-04 14:33:30,792 [INFO] 127.0.0.1 - - [04/Mar/2026 14:33:30] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:33:38,260 [INFO] Upload received: IMG_8585_1.pdf for action unlock_pdf
+2026-03-04 14:33:38,409 [ERROR] 
+2026-03-04 14:33:38,409 [INFO] 127.0.0.1 - - [04/Mar/2026 14:33:38] "[35m[1mPOST /process HTTP/1.1[0m" 500 -
+2026-03-04 14:33:46,928 [INFO] Upload received: IMG_8585_1_locked.pdf for action unlock_pdf
+2026-03-04 14:33:47,492 [INFO] Processing completed: output\IMG_8585_1_locked_unlocked.pdf
+2026-03-04 14:33:47,492 [WARNING] Cleanup failed: [WinError 32] The process cannot access the file because it is being used by another process: 'output\\IMG_8585_1_locked_unlocked.pdf'
+2026-03-04 14:33:47,492 [INFO] 127.0.0.1 - - [04/Mar/2026 14:33:47] "POST /process HTTP/1.1" 200 -
+2026-03-04 14:35:36,593 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-04 14:35:36,593 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-04 14:35:36,593 [INFO]  * Restarting with stat
+2026-03-04 14:35:36,894 [WARNING]  * Debugger is active!
+2026-03-04 14:35:36,894 [INFO]  * Debugger PIN: 300-561-094
+2026-03-04 14:36:50,733 [INFO] 127.0.0.1 - - [04/Mar/2026 14:36:50] "GET / HTTP/1.1" 200 -
+2026-03-04 14:36:50,761 [INFO] 127.0.0.1 - - [04/Mar/2026 14:36:50] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2026-03-04 14:37:20,553 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-04 14:37:20,553 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-04 14:37:20,553 [INFO]  * Restarting with stat
+2026-03-04 14:37:20,857 [WARNING]  * Debugger is active!
+2026-03-04 14:37:20,857 [INFO]  * Debugger PIN: 300-561-094
+2026-03-04 14:39:39,652 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-03-04 14:39:39,652 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-04 14:39:39,652 [INFO]  * Restarting with stat
+2026-03-04 14:39:39,953 [WARNING]  * Debugger is active!
+2026-03-04 14:39:39,953 [INFO]  * Debugger PIN: 300-561-094
+2026-03-04 14:39:50,799 [INFO] 127.0.0.1 - - [04/Mar/2026 14:39:50] "GET / HTTP/1.1" 200 -
+2026-03-04 14:39:50,838 [INFO] 127.0.0.1 - - [04/Mar/2026 14:39:50] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
+2026-03-04 14:55:22,059 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.26:5000
+2026-03-04 14:55:22,059 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-04 15:00:59,950 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.2.26:5000
+2026-03-04 15:00:59,950 [INFO] [33mPress CTRL+C to quit[0m
+2026-03-04 15:02:05,501 [INFO] 127.0.0.1 - - [04/Mar/2026 15:02:05] "GET / HTTP/1.1" 200 -
+2026-03-04 15:02:05,526 [INFO] 127.0.0.1 - - [04/Mar/2026 15:02:05] "[33mGET /static/css/style.css HTTP/1.1[0m" 404 -
