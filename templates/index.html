@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Suite</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            background: #f9f9f9;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        #drop-area.dragover {
+            background: #e9f7ef;
+            border-color: #4CAF50;
+        }
+        #drop-area p {
+            margin: 0;
+            font-size: 16px;
+            color: #555;
+        }
+        #file { display: none; }
+        #degrees-container { display: none; }
+        #password-container { display: none; }
+    </style>
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center vh-100">
+
+<div class="container">
+    <div class="card shadow-lg p-4 mx-auto" style="max-width:500px; border-radius:15px;">
+        <h1 class="text-center mb-2">PDF Suite</h1>
+        <p class="text-center text-muted mb-4">Free tools to convert and manage your PDFs</p>
+
+        <!-- Alert Area -->
+        <div id="alert-area"></div>
+
+        <form id="pdfForm" method="POST" action="/process" enctype="multipart/form-data">
+
+            <div id="drop-area" class="mb-3">
+                <p>Drag & Drop your file here<br>or click to select</p>
+            </div>
+            <input type="file" name="file" id="file" required>
+
+            <label class="form-label">Choose action</label>
+            <select class="form-select mb-3" name="action" id="action" required>
+                <option value="pdf_to_word">PDF → Word</option>
+                <option value="word_to_pdf">Word → PDF</option>
+                <option value="pdf_to_image">PDF → Image</option>
+                <option value="image_to_pdf">Image → PDF</option>
+                <option value="pdf_to_text">PDF → Text</option>
+                <option value="compress">Compress PDF</option>
+                <option value="rotate">Rotate PDF</option>
+                <option value="lock_pdf">Lock PDF</option>
+                <option value="unlock_pdf">Unlock PDF</option>
+            </select>
+
+            <div id="password-container">
+                <label class="form-label">Password (only for lock/unlock)</label>
+                <input class="form-control mb-3" type="text" name="password" id="password" placeholder="Enter password">
+            </div>
+
+            <div id="degrees-container">
+                <label class="form-label">Degrees (only for rotate)</label>
+                <select class="form-select mb-3" name="degrees" id="degrees">
+                    <option value="90">90°</option>
+                    <option value="180">180°</option>
+                    <option value="270">270°</option>
+                </select>
+            </div>
+
+            <button id="submitBtn" class="btn btn-primary w-100" type="submit">Process File</button>
+
+            <div id="loading" class="text-center mt-3" style="display:none;">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2">Processing file...</p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+const actionSelect = document.getElementById('action');
+const passwordContainer = document.getElementById('password-container');
+const degreesContainer = document.getElementById('degrees-container');
+const form = document.getElementById('pdfForm');
+const loading = document.getElementById('loading');
+const submitBtn = document.getElementById('submitBtn');
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file');
+const alertArea = document.getElementById('alert-area');
+
+function showAlert(message, type="danger") {
+    alertArea.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+}
+
+function toggleFields() {
+    passwordContainer.style.display =
+        (actionSelect.value === 'lock_pdf' || actionSelect.value === 'unlock_pdf') ? 'block' : 'none';
+    degreesContainer.style.display =
+        (actionSelect.value === 'rotate') ? 'block' : 'none';
+}
+actionSelect.addEventListener('change', toggleFields);
+toggleFields();
+
+function updateDropAreaText() {
+    if (fileInput.files.length) {
+        dropArea.querySelector('p').innerText = fileInput.files[0].name;
+    } else {
+        dropArea.querySelector('p').innerHTML =
+            'Drag & Drop your file here<br>or click to select';
+    }
+}
+
+dropArea.addEventListener('click', () => fileInput.click());
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('dragover');
+});
+dropArea.addEventListener('dragleave', () => dropArea.classList.remove('dragover'));
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('dragover');
+    if (e.dataTransfer.files.length) {
+        fileInput.files = e.dataTransfer.files;
+        updateDropAreaText();
+    }
+});
+fileInput.addEventListener('change', updateDropAreaText);
+
+form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    alertArea.innerHTML = "";
+
+    if (!fileInput.files.length) {
+        showAlert("Please select a file first!", "warning");
+        return;
+    }
+
+    loading.style.display = "block";
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Processing...";
+
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch("/process", { method: "POST", body: formData });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            showAlert(errorText || "Error processing file", "danger");
+            return;
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+
+        const disposition = response.headers.get("Content-Disposition");
+        let filename = "output_file";
+        if (disposition && disposition.includes("filename=")) {
+            filename = disposition.split("filename=")[1].replace(/"/g, "");
+        }
+
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+        showAlert("File processed successfully! Download completed!", "success");
+
+    } catch (err) {
+        showAlert("An unexpected error occurred.", "danger");
+    } finally {
+        loading.style.display = "none";
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Process File";
+    }
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
