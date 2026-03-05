@@ -30,10 +30,12 @@ app.config['MAX_CONTENT_LENGTH'] = 25 * 1024 * 1024
 # ------------------------
 
 limiter = Limiter(
-    get_remote_address,
-    app=app,
+    key_func=get_remote_address,
     default_limits=["20 per minute"]
 )
+
+limiter.init_app(app)
+
 
 # ------------------------
 # Logging setup
