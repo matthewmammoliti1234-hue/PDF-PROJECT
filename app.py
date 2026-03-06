@@ -13,7 +13,8 @@ app = Flask(__name__)
 
 UPLOAD_FOLDER = "uploads"
 OUTPUT_FOLDER = "output"
-SCRIPT_FOLDER = ".."
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRIPT_FOLDER = os.path.abspath(os.path.join(BASE_DIR, ".."))
 LOG_FOLDER = "logs"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
