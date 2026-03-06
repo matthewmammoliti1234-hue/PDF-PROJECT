@@ -14,7 +14,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
 OUTPUT_FOLDER = "output"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SCRIPT_FOLDER = os.path.abspath(os.path.join(BASE_DIR, ".."))
+SCRIPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pdf converter")
 LOG_FOLDER = "logs"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
