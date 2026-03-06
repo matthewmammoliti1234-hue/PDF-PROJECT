@@ -221,13 +221,14 @@ def process():
         )
 
         os.remove(input_path)
-        
-if result.returncode != 0:
-    # Log both stdout and stderr from the subprocess
-    logging.error(
-        f"Subprocess failed.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}"
-    )
-    return "Error processing file", 500
+
+        if result.returncode != 0:
+
+            logging.error(
+                f"Subprocess failed.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+            )
+
+            return "Error processing file", 500
 
         if not os.path.exists(output_file):
 
