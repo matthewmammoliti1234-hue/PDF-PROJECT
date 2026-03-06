@@ -9,3 +9,4 @@ python-docx==0.8.11
 pdfminer.six==20221105
 img2pdf==0.4.4
 PyMuPDF==1.23.3
+docx2pdf==0.1.8
