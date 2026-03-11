@@ -220,7 +220,7 @@ def process():
             ["python", script_path] + args,
             capture_output=True,
             text=True,
-            timeout=30
+            timeout=120
         )
 
         os.remove(input_path)
