@@ -1,32 +1,26 @@
 import sys
-import subprocess
-import os
+from docx import Document
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 input_file = sys.argv[1]
 output_file = sys.argv[2]
 
-try:
-    output_dir = os.path.dirname(output_file)
+doc = Document(input_file)
 
-    subprocess.run([
-        "libreoffice",
-        "--headless",
-        "--convert-to", "pdf",
-        input_file,
-        "--outdir", output_dir
-    ], check=True)
+c = canvas.Canvas(output_file, pagesize=letter)
+width, height = letter
+y = height - 50
 
-    # LibreOffice creates PDF with same base filename
-    generated_pdf = os.path.join(
-        output_dir,
-        os.path.splitext(os.path.basename(input_file))[0] + ".pdf"
-    )
+for para in doc.paragraphs:
+    text = para.text
+    c.drawString(50, y, text)
+    y -= 20
 
-    # Rename it to the desired output file name
-    os.rename(generated_pdf, output_file)
+    if y < 50:
+        c.showPage()
+        y = height - 50
 
-    print("Conversion successful")
+c.save()
 
-except Exception as e:
-    print("Conversion failed:", e)
-    sys.exit(1)
+print("Conversion successful")
