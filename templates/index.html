@@ -33,25 +33,12 @@
         }
     </style>
 </head>
-<body class="bg-light d-flex align-items-center justify-content-center vh-100">
+<body class="bg-light d-flex flex-column align-items-center justify-content-center vh-100">
 
 <div class="container">
     <div class="card shadow-lg p-4 mx-auto" style="max-width:500px; border-radius:15px;">
         <h1 class="text-center mb-2">PDF Suite</h1>
         <p class="text-center text-muted mb-3">Free tools to convert and manage your PDFs</p>
-
-        <!-- Tool Menu -->
-        <div class="tool-menu d-flex flex-wrap justify-content-center mb-4">
-            <a href="/pdf-to-word" class="btn btn-outline-primary btn-sm">PDF → Word</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm disabled">Word → PDF</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm disabled">PDF → Image</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm disabled">Image → PDF</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm disabled">PDF → Text</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm disabled">Compress PDF</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm disabled">Rotate PDF</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm disabled">Lock PDF</a>
-            <a href="#" class="btn btn-outline-secondary btn-sm disabled">Unlock PDF</a>
-        </div>
 
         <!-- Alert Area -->
         <div id="alert-area"></div>
@@ -97,6 +84,19 @@
                 <p class="mt-2">Processing file...</p>
             </div>
         </form>
+    </div>
+
+    <!-- Tool Menu BELOW the main card -->
+    <div class="tool-menu d-flex flex-wrap justify-content-center mt-4">
+        <a href="/pdf-to-word" class="btn btn-outline-primary btn-sm">PDF → Word</a>
+        <a href="#" class="btn btn-outline-secondary btn-sm disabled">Word → PDF</a>
+        <a href="#" class="btn btn-outline-secondary btn-sm disabled">PDF → Image</a>
+        <a href="#" class="btn btn-outline-secondary btn-sm disabled">Image → PDF</a>
+        <a href="#" class="btn btn-outline-secondary btn-sm disabled">PDF → Text</a>
+        <a href="#" class="btn btn-outline-secondary btn-sm disabled">Compress PDF</a>
+        <a href="#" class="btn btn-outline-secondary btn-sm disabled">Rotate PDF</a>
+        <a href="#" class="btn btn-outline-secondary btn-sm disabled">Lock PDF</a>
+        <a href="#" class="btn btn-outline-secondary btn-sm disabled">Unlock PDF</a>
     </div>
 </div>
 
