@@ -113,6 +113,34 @@ def pdf_to_word():
 def word_to_pdf():
     return render_template("word_to_pdf.html")
 
+@app.route("/image-to-pdf")
+def image_to_pdf():
+    return render_template("image_to_pdf.html")
+
+@app.route("/pdf-to-image")
+def pdf_to_image():
+    return render_template("pdf_to_image.html")
+
+@app.route("/pdf-to-text")
+def pdf_to_text():
+    return render_template("pdf_to_text.html")
+
+@app.route("/compress-pdf")
+def compress_pdf():
+    return render_template("compress_pdf.html")
+
+@app.route("/rotate-pdf")
+def rotate_pdf():
+    return render_template("rotate_pdf.html")
+
+@app.route("/lock-pdf")
+def lock_pdf():
+    return render_template("lock_pdf.html")
+
+@app.route("/unlock-pdf")
+def unlock_pdf():
+    return render_template("unlock_pdf.html")
+
 
 # Limit upload endpoint
 @app.route("/process", methods=["POST"])
