@@ -105,6 +105,10 @@ def cleanup_old_files(folder, max_age=3600):
 def index():
     return render_template("index.html")
 
+@app.route("/pdf-to-word")
+def pdf_to_word():
+    return render_template("pdf_to_word.html")
+
 
 # Limit upload endpoint
 @app.route("/process", methods=["POST"])
