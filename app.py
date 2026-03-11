@@ -109,6 +109,10 @@ def index():
 def pdf_to_word():
     return render_template("pdf_to_word.html")
 
+@app.route("/word-to-pdf")
+def word_to_pdf():
+    return render_template("word_to_pdf.html")
+
 
 # Limit upload endpoint
 @app.route("/process", methods=["POST"])
