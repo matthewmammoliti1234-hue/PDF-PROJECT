@@ -129,7 +129,7 @@ def pdf_to_text():
 def compress_pdf():
     return render_template("compress_pdf.html")
 
-@app.route("/rotate-pdf")
+@app.route("/rotate")
 def rotate_pdf():
     return render_template("rotate_pdf.html")
 
