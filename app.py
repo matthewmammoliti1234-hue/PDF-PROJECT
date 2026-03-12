@@ -125,7 +125,7 @@ def pdf_to_image():
 def pdf_to_text():
     return render_template("pdf_to_text.html")
 
-@app.route("/compress-pdf")
+@app.route("/compress")
 def compress_pdf():
     return render_template("compress_pdf.html")
 
