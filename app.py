@@ -133,11 +133,11 @@ def compress_pdf():
 def rotate_pdf():
     return render_template("rotate_pdf.html")
 
-@app.route("/lock_pdf")
+@app.route("/lock-pdf")
 def lock_pdf():
     return render_template("lock_pdf.html")
 
-@app.route("/unlock_pdf")
+@app.route("/unlock-pdf")
 def unlock_pdf():
     return render_template("unlock_pdf.html")
 
