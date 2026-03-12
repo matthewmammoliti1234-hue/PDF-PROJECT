@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lock PDF</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+#drop-area {
+border: 2px dashed #ccc;
+border-radius: 10px;
+padding: 30px;
+text-align: center;
+cursor: pointer;
+background: #f9f9f9;
+transition: background 0.3s, border-color 0.3s;
+}
+
+#drop-area.dragover {
+background: #e9f7ef;
+border-color: #4CAF50;
+}
+
+#drop-area p {
+margin: 0;
+font-size: 16px;
+color: #555;
+}
+
+#file { display:none; }
+
+.tool-menu .btn {
+margin: 2px;
+flex: 1 1 auto;
+}
+</style>
+</head>
+
+<body class="bg-light d-flex flex-column align-items-center justify-content-center vh-100">
+
+<div class="container">
+
+<div class="card shadow-lg p-4 mx-auto" style="max-width:500px; border-radius:15px;">
+
+<h1 class="text-center mb-2">Lock PDF</h1>
+<p class="text-center text-muted mb-3">Protect your PDF with a password</p>
+
+<div id="alert-area"></div>
+
+<form id="pdfForm" method="POST" action="/process" enctype="multipart/form-data">
+
+<div id="drop-area" class="mb-3">
+<p>Drag & Drop your PDF here<br>or click to select</p>
+</div>
+
+<input type="file" name="file" id="file" accept=".pdf" required>
+
+<input type="hidden" name="action" value="lock_pdf">
+
+<label class="form-label">Set Password</label>
+<input class="form-control mb-3" type="text" name="password" placeholder="Enter password" required>
+
+<button id="submitBtn" class="btn btn-primary w-100" type="submit">Lock PDF</button>
+
+<div id="loading" class="text-center mt-3" style="display:none;">
+<div class="spinner-border text-primary"></div>
+<p class="mt-2">Processing file...</p>
+</div>
+
+</form>
+
+</div>
+
+<div class="tool-menu d-flex flex-wrap justify-content-center mt-4">
+<a href="/pdf-to-word" class="btn btn-outline-primary btn-sm">PDF → Word</a>
+<a href="/word-to-pdf" class="btn btn-outline-primary btn-sm">Word → PDF</a>
+<a href="/pdf-to-image" class="btn btn-outline-primary btn-sm">PDF → Image</a>
+<a href="/image-to-pdf" class="btn btn-outline-primary btn-sm">Image → PDF</a>
+<a href="/pdf-to-text" class="btn btn-outline-primary btn-sm">PDF → Text</a>
+<a href="/compress-pdf" class="btn btn-outline-primary btn-sm">Compress PDF</a>
+<a href="/rotate-pdf" class="btn btn-outline-primary btn-sm">Rotate PDF</a>
+<a href="/lock-pdf" class="btn btn-outline-primary btn-sm">Lock PDF</a>
+<a href="/unlock-pdf" class="btn btn-outline-primary btn-sm">Unlock PDF</a>
+</div>
+
+</div>
+
+<script>
+
+const form = document.getElementById('pdfForm');
+const loading = document.getElementById('loading');
+const submitBtn = document.getElementById('submitBtn');
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file');
+const alertArea = document.getElementById('alert-area');
+
+function showAlert(message,type="danger"){
+alertArea.innerHTML = `
+<div class="alert alert-${type} alert-dismissible fade show">
+${message}
+<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>`;
+}
+
+function updateDropAreaText(){
+if(fileInput.files.length){
+dropArea.querySelector('p').innerText = fileInput.files[0].name;
+}else{
+dropArea.querySelector('p').innerHTML = 'Drag & Drop your PDF here<br>or click to select';
+}
+}
+
+dropArea.addEventListener('click',()=>fileInput.click());
+
+dropArea.addEventListener('dragover',(e)=>{
+e.preventDefault();
+dropArea.classList.add('dragover');
+});
+
+dropArea.addEventListener('dragleave',()=>{
+dropArea.classList.remove('dragover');
+});
+
+dropArea.addEventListener('drop',(e)=>{
+e.preventDefault();
+dropArea.classList.remove('dragover');
+
+if(e.dataTransfer.files.length){
+fileInput.files = e.dataTransfer.files;
+updateDropAreaText();
+}
+});
+
+fileInput.addEventListener('change',updateDropAreaText);
+
+form.addEventListener("submit", async function(e){
+
+e.preventDefault();
+alertArea.innerHTML = "";
+
+if(!fileInput.files.length){
+showAlert("Please select a file first!","warning");
+return;
+}
+
+loading.style.display="block";
+submitBtn.disabled=true;
+submitBtn.innerText="Processing...";
+
+const formData = new FormData(form);
+
+try{
+
+const response = await fetch("/process",{method:"POST",body:formData});
+
+if(!response.ok){
+const errorText = await response.text();
+showAlert(errorText || "Error processing file","danger");
+return;
+}
+
+const blob = await response.blob();
+const url = window.URL.createObjectURL(blob);
+const a = document.createElement("a");
+
+a.href = url;
+
+let filename="locked.pdf";
+const disposition = response.headers.get("Content-Disposition");
+
+if(disposition && disposition.includes("filename=")){
+filename = disposition.split("filename=")[1].replace(/"/g,"");
+}
+
+a.download = filename;
+
+document.body.appendChild(a);
+a.click();
+a.remove();
+
+window.URL.revokeObjectURL(url);
+
+showAlert("PDF locked successfully!","success");
+
+}catch(err){
+
+showAlert("An unexpected error occurred.","danger");
+
+}finally{
+
+loading.style.display="none";
+submitBtn.disabled=false;
+submitBtn.innerText="Lock PDF";
+
+}
+
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
