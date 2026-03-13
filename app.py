@@ -341,5 +341,4 @@ def ratelimit_handler(e):
     return "Too many requests. Please slow down.", 429
 
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+
