@@ -73,9 +73,28 @@ def allowed_file(filename, action):
     return ext in ALLOWED_EXTENSIONS.get(action, [])
 
 
+import magic  # at the top of your file
+
+# Map each action to allowed MIME types
+ALLOWED_MIMES = {
+    "pdf_to_word": ["application/pdf"],
+    "word_to_pdf": [
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/msword"
+    ],
+    "image_to_pdf": ["image/png", "image/jpeg", "image/bmp", "image/tiff"],
+    "pdf_to_image": ["application/pdf"],
+    "pdf_to_text": ["application/pdf"],
+    "compress": ["application/pdf"],
+    "rotate": ["application/pdf"],
+    "lock_pdf": ["application/pdf"],
+    "unlock_pdf": ["application/pdf"]
+}
+
 def check_mime_type(filepath, action):
-    ext = filepath.rsplit(".", 1)[-1].lower()
-    return ext in ALLOWED_EXTENSIONS.get(action, [])
+    mime = magic.from_file(filepath, mime=True)
+    allowed_mimes = ALLOWED_MIMES.get(action, [])
+    return mime in allowed_mimes
 
 
 def cleanup_old_files(folder, max_age=3600):
