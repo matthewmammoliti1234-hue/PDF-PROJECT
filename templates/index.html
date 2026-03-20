@@ -2,9 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PDF Suite</title>
+    <title>PDF Suite – Free PDF Tools for Converting, Compressing, and Editing</title>
+    <meta name="description" content="PDF Suite offers free online tools to convert PDFs to Word, images, text, compress PDFs, rotate pages, lock/unlock PDFs, and more. Fast, secure, and free.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PDF Suite – Free PDF Tools">
+    <meta property="og:description" content="Convert, compress, rotate, and manage your PDFs online for free.">
+    <meta property="og:url" content="https://www.freepdfsuite.com/">
+    <meta property="og:image" content="{{ url_for('static', filename='images/og-image.png') }}">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PDF Suite – Free PDF Tools">
+    <meta name="twitter:description" content="Convert, compress, rotate, and manage your PDFs online for free.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/og-image.png') }}">
+    <meta name="twitter:site" content="@YourTwitterHandle">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "PDF Suite",
+      "url": "https://www.freepdfsuite.com/",
+      "description": "Convert, compress, rotate, and manage PDFs online for free.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "PDF Suite",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ url_for('static', filename='images/logo.png') }}"
+        }
+      }
+    }
+    </script>
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         #drop-area {
             border: 2px dashed #ccc;
@@ -87,16 +128,15 @@
     </div>
 
     <div class="tool-menu d-flex flex-wrap justify-content-center mt-4">
-    <a href="/pdf-to-word" class="btn btn-outline-primary btn-sm">PDF → Word</a>
-    <a href="/word-to-pdf" class="btn btn-outline-primary btn-sm">Word → PDF</a>
-    <a href="/pdf-to-image" class="btn btn-outline-primary btn-sm">PDF → Image</a>
-    <a href="/image-to-pdf" class="btn btn-outline-primary btn-sm">Image → PDF</a>
-    <a href="/pdf-to-text" class="btn btn-outline-primary btn-sm">PDF → Text</a>
-    <a href="/compress" class="btn btn-outline-primary btn-sm">Compress PDF</a>
-    <a href="/rotate" class="btn btn-outline-primary btn-sm">Rotate PDF</a>
-    <a href="/lock-pdf" class="btn btn-outline-primary btn-sm">Lock PDF</a>
-    <a href="/unlock-pdf" class="btn btn-outline-primary btn-sm">Unlock PDF</a>
-</div>
+        <a href="/pdf-to-word" class="btn btn-outline-primary btn-sm">PDF → Word</a>
+        <a href="/word-to-pdf" class="btn btn-outline-primary btn-sm">Word → PDF</a>
+        <a href="/pdf-to-image" class="btn btn-outline-primary btn-sm">PDF → Image</a>
+        <a href="/image-to-pdf" class="btn btn-outline-primary btn-sm">Image → PDF</a>
+        <a href="/pdf-to-text" class="btn btn-outline-primary btn-sm">PDF → Text</a>
+        <a href="/compress" class="btn btn-outline-primary btn-sm">Compress PDF</a>
+        <a href="/rotate" class="btn btn-outline-primary btn-sm">Rotate PDF</a>
+        <a href="/lock-pdf" class="btn btn-outline-primary btn-sm">Lock PDF</a>
+        <a href="/unlock-pdf" class="btn btn-outline-primary btn-sm">Unlock PDF</a>
     </div>
 </div>
 
