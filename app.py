@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, send_from_directory, abort, after_this_request
+from flask import Flask, render_template, request, send_from_directory, abort, after_this_request, Response, url_for
 import os
 import subprocess
 import logging
 import time
 from werkzeug.utils import secure_filename
+import magic  # MIME type checking
 
 # Rate limiting
 from flask_limiter import Limiter
@@ -14,7 +15,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
 OUTPUT_FOLDER = "output"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SCRIPT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pdf converter")
+SCRIPT_FOLDER = os.path.join(BASE_DIR, "pdf converter")
 LOG_FOLDER = "logs"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -29,32 +30,27 @@ app.config['MAX_CONTENT_LENGTH'] = 25 * 1024 * 1024
 # ------------------------
 # Rate Limiter
 # ------------------------
-
 limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["20 per minute"]
 )
-
 limiter.init_app(app)
-
 
 # ------------------------
 # Logging setup
 # ------------------------
-
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
         logging.FileHandler(os.path.join(LOG_FOLDER, "server.log")),
-        logging.StreamHandler()  # sends logs to Render console
+        logging.StreamHandler()
     ]
 )
 
 # ------------------------
-# Allowed extensions
+# Allowed extensions and MIME types
 # ------------------------
-
 ALLOWED_EXTENSIONS = {
     "pdf_to_word": ["pdf"],
     "word_to_pdf": ["docx", "doc"],
@@ -67,15 +63,6 @@ ALLOWED_EXTENSIONS = {
     "unlock_pdf": ["pdf"]
 }
 
-
-def allowed_file(filename, action):
-    ext = filename.rsplit(".", 1)[-1].lower()
-    return ext in ALLOWED_EXTENSIONS.get(action, [])
-
-
-import magic  # at the top of your file
-
-# Map each action to allowed MIME types
 ALLOWED_MIMES = {
     "pdf_to_word": ["application/pdf"],
     "word_to_pdf": [
@@ -91,35 +78,29 @@ ALLOWED_MIMES = {
     "unlock_pdf": ["application/pdf"]
 }
 
+def allowed_file(filename, action):
+    ext = filename.rsplit(".", 1)[-1].lower()
+    return ext in ALLOWED_EXTENSIONS.get(action, [])
+
 def check_mime_type(filepath, action):
     mime = magic.from_file(filepath, mime=True)
     allowed_mimes = ALLOWED_MIMES.get(action, [])
     return mime in allowed_mimes
 
-
 def cleanup_old_files(folder, max_age=3600):
-    """
-    Delete files older than max_age seconds
-    Default: 1 hour
-    """
     now = time.time()
-
     for filename in os.listdir(folder):
-
         path = os.path.join(folder, filename)
+        if os.path.isfile(path) and (now - os.path.getmtime(path) > max_age):
+            try:
+                os.remove(path)
+                logging.info(f"Deleted old file: {filename}")
+            except Exception as e:
+                logging.warning(f"Failed to delete {filename}: {e}")
 
-        if os.path.isfile(path):
-
-            if now - os.path.getmtime(path) > max_age:
-
-                try:
-                    os.remove(path)
-                    logging.info(f"Deleted old file: {filename}")
-
-                except Exception as e:
-                    logging.warning(f"Failed to delete {filename}: {e}")
-
-
+# ------------------------
+# Routes for pages
+# ------------------------
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -160,19 +141,17 @@ def lock_pdf():
 def unlock_pdf():
     return render_template("unlock_pdf.html")
 
-
-# Limit upload endpoint
+# ------------------------
+# File processing endpoint
+# ------------------------
 @app.route("/process", methods=["POST"])
 @limiter.limit("10 per minute")
 def process():
-
     cleanup_old_files(OUTPUT_FOLDER)
     cleanup_old_files(UPLOAD_FOLDER)
-
     input_path = None
 
     try:
-
         file = request.files.get("file")
         action = request.form.get("action")
         password = request.form.get("password")
@@ -182,17 +161,13 @@ def process():
             return "No file or action selected", 400
 
         filename = secure_filename(file.filename)
-
         if not filename:
             return "Invalid file name", 400
-
         if not allowed_file(filename, action):
             return f"File type not allowed for {action}", 400
 
         input_path = os.path.join(UPLOAD_FOLDER, filename)
-
         file.save(input_path)
-
         logging.info(f"Upload received: {filename} for action {action}")
 
         if not check_mime_type(input_path, action):
@@ -204,92 +179,40 @@ def process():
         script_path = None
         args = []
 
-        if action == "pdf_to_word":
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}.docx")
-            script_path = os.path.join(SCRIPT_FOLDER, "pdf_to_word.py")
-            args = [input_path, output_file]
+        # Map actions to scripts
+        action_map = {
+            "pdf_to_word": ("pdf_to_word.py", f"{base_name}.docx", [input_path]),
+            "word_to_pdf": ("word_to_pdf.py", f"{base_name}.pdf", [input_path]),
+            "image_to_pdf": ("image_to_pdf.py", f"{base_name}.pdf", [input_path]),
+            "pdf_to_image": ("pdf_to_image.py", f"{base_name}_images.zip", [input_path]),
+            "pdf_to_text": ("pdf_to_text.py", f"{base_name}.txt", [input_path]),
+            "compress": ("compress_pdf.py", f"{base_name}_compressed.pdf", [input_path]),
+            "rotate": ("rotate_pdf.py", f"{base_name}_rotated.pdf", [rotate_degrees if rotate_degrees in ["90","180","270"] else "90", input_path]),
+            "lock_pdf": ("pdf_password.py", f"{base_name}_locked.pdf", ["lock", password or DEFAULT_PASSWORD, input_path]),
+            "unlock_pdf": ("pdf_password.py", f"{base_name}_unlocked.pdf", ["unlock", password or DEFAULT_PASSWORD, input_path])
+        }
 
-        elif action == "word_to_pdf":
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}.pdf")
-            script_path = os.path.join(SCRIPT_FOLDER, "word_to_pdf.py")
-            args = [input_path, output_file]
-
-        elif action == "image_to_pdf":
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}.pdf")
-            script_path = os.path.join(SCRIPT_FOLDER, "image_to_pdf.py")
-            args = [input_path, output_file]
-
-        elif action == "pdf_to_image":
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}_images.zip")
-            script_path = os.path.join(SCRIPT_FOLDER, "pdf_to_image.py")
-            args = [input_path, output_file]
-
-        elif action == "pdf_to_text":
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}.txt")
-            script_path = os.path.join(SCRIPT_FOLDER, "pdf_to_text.py")
-            args = [input_path, output_file]
-
-        elif action == "compress":
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}_compressed.pdf")
-            script_path = os.path.join(SCRIPT_FOLDER, "compress_pdf.py")
-            args = [input_path, output_file]
-
-        elif action == "rotate":
-
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}_rotated.pdf")
-
-            script_path = os.path.join(SCRIPT_FOLDER, "rotate_pdf.py")
-
-            degrees = rotate_degrees if rotate_degrees in ["90", "180", "270"] else "90"
-
-            args = [input_path, degrees, output_file]
-
-        elif action == "lock_pdf":
-
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}_locked.pdf")
-
-            script_path = os.path.join(SCRIPT_FOLDER, "pdf_password.py")
-
-            args = [input_path, output_file, "lock", password or DEFAULT_PASSWORD]
-
-        elif action == "unlock_pdf":
-
-            output_file = os.path.join(OUTPUT_FOLDER, f"{base_name}_unlocked.pdf")
-
-            script_path = os.path.join(SCRIPT_FOLDER, "pdf_password.py")
-
-            args = [input_path, output_file, "unlock", password or DEFAULT_PASSWORD]
-
-        else:
-
+        if action not in action_map:
             os.remove(input_path)
             return "Action not implemented", 400
 
-        if not os.path.exists(script_path):
+        script_file, out_filename, extra_args = action_map[action]
+        output_file = os.path.join(OUTPUT_FOLDER, out_filename)
+        script_path = os.path.join(SCRIPT_FOLDER, script_file)
+        args = extra_args + [output_file] if action != "rotate" else [input_path] + extra_args + [output_file]
 
+        if not os.path.exists(script_path):
             os.remove(input_path)
             logging.error(f"Script missing: {script_path}")
             return "Server configuration error", 500
 
-        result = subprocess.run(
-            ["python", script_path] + args,
-            capture_output=True,
-            text=True,
-            timeout=120
-        )
-
+        result = subprocess.run(["python", script_path] + args, capture_output=True, text=True, timeout=120)
         os.remove(input_path)
 
         if result.returncode != 0:
-
-            logging.error(
-                f"Subprocess failed.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}"
-            )
-
+            logging.error(f"Subprocess failed.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}")
             return result.stderr, 500
-
         if not os.path.exists(output_file):
-
             logging.error("Output file not created")
             return "Processing failed", 500
 
@@ -297,48 +220,55 @@ def process():
 
         @after_this_request
         def remove_file(response):
-
             try:
-
                 os.remove(output_file)
                 logging.info(f"Deleted output file: {output_file}")
-
             except Exception as e:
-
                 logging.warning(f"Cleanup failed: {e}")
-
             return response
 
-        return send_from_directory(
-            OUTPUT_FOLDER,
-            os.path.basename(output_file),
-            as_attachment=True
-        )
+        return send_from_directory(OUTPUT_FOLDER, os.path.basename(output_file), as_attachment=True)
 
     except subprocess.TimeoutExpired:
-
         if input_path and os.path.exists(input_path):
             os.remove(input_path)
-
         logging.error("Processing timeout")
-
         return "Processing timed out", 500
 
     except Exception as e:
-
         if input_path and os.path.exists(input_path):
             os.remove(input_path)
-
         logging.error(f"Server error: {str(e)}")
-
         return "Server error occurred", 500
 
-
+# ------------------------
 # Rate limit handler
+# ------------------------
 @app.errorhandler(429)
 def ratelimit_handler(e):
     logging.warning("Rate limit exceeded")
     return "Too many requests. Please slow down.", 429
 
+# ------------------------
+# Sitemap route
+# ------------------------
+@app.route("/sitemap.xml", methods=["GET"])
+def sitemap():
+    pages = [
+        "/", "/pdf-to-word", "/word-to-pdf", "/image-to-pdf",
+        "/pdf-to-image", "/pdf-to-text", "/compress", "/rotate",
+        "/lock-pdf", "/unlock-pdf"
+    ]
+    sitemap_xml = ["<?xml version='1.0' encoding='UTF-8'?>",
+                   "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>"]
+    for page in pages:
+        sitemap_xml.append("<url>")
+        sitemap_xml.append(f"<loc>{request.url_root[:-1]}{page}</loc>")
+        sitemap_xml.append("</url>")
+    sitemap_xml.append("</urlset>")
+    return Response("\n".join(sitemap_xml), mimetype="application/xml")
 
-
+# ------------------------
+# Production deployment note:
+# ------------------------
+# Do NOT use app.run() in production; use a WSGI server like gunicorn on Render.
